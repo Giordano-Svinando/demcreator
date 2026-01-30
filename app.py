@@ -53,3 +53,17 @@ if st.button("Genera Copy Ora", type="primary"):
             st.success("Generazione completata!")
             st.markdown("---")
             st.markdown(response.choices[0].message.content)
+
+import time
+from openai import RateLimitError
+
+def call_with_retry(client, **kwargs):
+    wait = 1
+    for _ in range(6):
+        try:
+            return client.chat.completions.create(**kwargs)
+        except RateLimitError:
+            time.sleep(wait)
+            wait *= 2
+    raise
+
