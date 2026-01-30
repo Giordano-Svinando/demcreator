@@ -49,10 +49,10 @@ if st.button("Genera Copy Ora", type="primary"):
             response = client.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": prompt}],
-    max_tokens=500,
-)
+    max_tokens=500
+    )
 
-            )
+            
             st.success("Generazione completata!")
             st.markdown("---")
             st.markdown(response.choices[0].message.content)
