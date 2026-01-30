@@ -26,13 +26,6 @@ shipping = st.checkbox("Menziona Spedizione Gratuita")
 if "busy" not in st.session_state:
     st.session_state.busy = False
 
-if st.button("Genera") and not st.session_state.busy:
-    st.session_state.busy = True
-    try:
-        res = generate(prompt)
-    finally:
-        st.session_state.busy = False
-
 
 if st.button("Genera Copy Ora", type="primary"):
     if not api_key:
