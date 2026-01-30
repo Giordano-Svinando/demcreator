@@ -23,6 +23,17 @@ offerta = st.text_area("1. Descrizione Offerta Commerciale (es. Prodotto, Prezzo
 concept = st.text_area("2. Tema / Concept Creativo (es. Vibes estive, Black Friday, San Valentino)", height=100)
 shipping = st.checkbox("Menziona Spedizione Gratuita")
 
+if "busy" not in st.session_state:
+    st.session_state.busy = False
+
+if st.button("Genera") and not st.session_state.busy:
+    st.session_state.busy = True
+    try:
+        res = generate(prompt)
+    finally:
+        st.session_state.busy = False
+
+
 if st.button("Genera Copy Ora", type="primary"):
     if not api_key:
         st.error("Errore: API Key non configurata nei Secrets di Streamlit.")
