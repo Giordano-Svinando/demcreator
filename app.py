@@ -12,7 +12,7 @@ except Exception as e:
     api_key = None
     st.sidebar.warning("⚠️ Chiave API non trovata nei Secrets")
 
-client = OpenAI(api_key=api_key)
+client = OpenAI(api_key="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")
 
 st.set_page_config(page_title="AI Email Generator", layout="centered")
 
