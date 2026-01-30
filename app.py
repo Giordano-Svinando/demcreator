@@ -4,8 +4,13 @@ from openai import OpenAI
 # Configurazione Segreti (l'app leggerà la chiave dalle impostazioni di Streamlit)
 try:
     api_key = st.secrets["OPENAI_API_KEY"]
-except:
+    if api_key.startswith("sk-"):
+        st.sidebar.success("✅ Chiave API rilevata correttamente")
+    else:
+        st.sidebar.error("❌ La chiave nei Secrets non sembra valida")
+except Exception as e:
     api_key = None
+    st.sidebar.warning("⚠️ Chiave API non trovata nei Secrets")
 
 client = OpenAI(api_key=api_key)
 
